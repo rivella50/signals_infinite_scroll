@@ -31,8 +31,8 @@ class PostsScreen extends StatelessWidget {
       return ListView.builder(
           itemCount: posts.length + (controller.isLastPageSignal.value ? 0 : 1),
           itemBuilder: (context, index) {
-            if (index == posts.length - _nextPageTrigger &&
-                !postsState.isLoading && !controller.isLastPageSignal.value) {
+            if (index == (posts.length - _nextPageTrigger) &&
+                controller.eligibleForFetchingData.value) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 controller.postsSignal.refresh();
               });

@@ -8,6 +8,7 @@ class Controller {
   late final postsSignal = futureSignal(() => fetchData(), initialValue: <Post>[]);
   final pageNumberSignal = signal(1);
   final isLastPageSignal = signal(false);
+  late final eligibleForFetchingData = computed(() => !postsSignal.value.isLoading && !isLastPageSignal.value);
   final int numberOfPostsPerRequest = 10;
 
   Future<List<Post>> fetchData() async {
