@@ -37,7 +37,7 @@ class PostItem extends StatelessWidget {
                   ),
                   Text(
                     body,
-                    style: const TextStyle(fontSize: 15),
+                    style: const TextStyle(fontSize: 15), overflow: TextOverflow.ellipsis,
                   )
                 ],
               ),
