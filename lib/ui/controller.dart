@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:signals/signals.dart';
-import 'package:signals_infinite_scroll/lib.dart';
+import 'package:signals_infinite_scroll/domain/post.dart';
 
 class Controller {
-  //final postsSignal = FutureSignal<List<Post>>(initialValue: <Post>[]);
-  late final postsSignal = futureSignal(() => fetchData(), initialValue: <Post>[]); //FutureSignal<List<Post>>(initialValue: <Post>[]);
+  late final postsSignal = futureSignal(() => fetchData(), initialValue: <Post>[]);
   final pageNumberSignal = signal(1);
   final isLastPageSignal = signal(false);
   final int numberOfPostsPerRequest = 10;
@@ -29,9 +28,11 @@ class Controller {
   }
 
   void resetAndFetchData() {
+    batch(() {
+      pageNumberSignal.value = 1;
+      isLastPageSignal.value = false;
+    });
     postsSignal.reset();
-    pageNumberSignal.value = 0;
-    isLastPageSignal.value = false;
-    fetchData();
+    postsSignal.call();
   }
 }

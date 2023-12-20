@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:signals/signals_flutter.dart';
-import 'package:signals_infinite_scroll/lib.dart';
+import 'package:signals_infinite_scroll/main.dart';
+import 'package:signals_infinite_scroll/ui/ui.dart';
 
 class PostsScreen extends StatelessWidget {
   const PostsScreen({super.key});

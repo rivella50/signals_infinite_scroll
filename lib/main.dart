@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:signals_infinite_scroll/lib.dart';
+import 'package:signals_infinite_scroll/ui/reload_button.dart';
+import 'package:signals_infinite_scroll/ui/ui.dart';
 
 final getIt = GetIt.instance;
 
@@ -31,6 +32,10 @@ class MainApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Infinite Posts'),
           centerTitle: true,
+          leading: const Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: ReloadButton(),
+          ),
           actions: const [
             Padding(
               padding: EdgeInsets.only(right: 25),
