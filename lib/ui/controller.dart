@@ -5,7 +5,7 @@ import 'package:signals/signals.dart';
 import 'package:signals_infinite_scroll/domain/post.dart';
 
 class Controller {
-  late final postsSignal = futureSignal(() => fetchData(), initialValue: <Post>[]);
+  late final postsSignal = futureSignal(() => fetchData(), initialValue: <Post>[], fireImmediately: true);
   final pageNumberSignal = signal(1);
   final isLastPageSignal = signal(false);
   late final eligibleForFetchingData = computed(() => !postsSignal.value.isLoading && !isLastPageSignal.value);
@@ -34,6 +34,5 @@ class Controller {
       isLastPageSignal.value = false;
     });
     postsSignal.reset();
-    postsSignal.call();
   }
 }
