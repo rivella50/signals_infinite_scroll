@@ -15,21 +15,16 @@ class PostsScreen extends StatelessWidget {
       final postsState = controller.postsSignal.value;
       final posts = postsState.value;
       if (!postsState.hasValue) {
-        if (postsState.isLoading) {
-          return const Center(
-              child: Padding(
-            padding: EdgeInsets.all(8),
-            child: CircularProgressIndicator(),
-          ));
-        } else if (postsState.hasError) {
-          return const Center(
-              child: Text(
-            'error',
-          ));
-        }
+        return postsState.hasError
+            ? const Center(
+                child: Text(
+                'error',
+              ))
+            : const SizedBox.shrink();
       }
       return ListView.builder(
-          itemCount: posts!.length + (controller.isLastPageSignal.value ? 0 : 1),
+          itemCount:
+              posts!.length + (controller.isLastPageSignal.value ? 0 : 1),
           itemBuilder: (context, index) {
             if (index == (posts.length - _nextPageTrigger) &&
                 controller.eligibleForFetchingData.value) {
@@ -44,11 +39,7 @@ class PostsScreen extends StatelessWidget {
                   'error',
                 ));
               } else {
-                return const Center(
-                    child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: CircularProgressIndicator(),
-                ));
+                return const SizedBox.shrink();
               }
             }
             final post = posts[index];

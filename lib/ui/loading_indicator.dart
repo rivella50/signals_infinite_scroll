@@ -8,9 +8,10 @@ class LoadingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Watch((context) => getIt<Controller>().postsSignal.value.isLoading
-      ? const CircularProgressIndicator()
-      : const SizedBox.shrink()
-    );
+    return Watch((context) {
+      return getIt<Controller>().postsSignal.value.isLoading
+          ? const CircularProgressIndicator()
+          : const SizedBox.shrink();
+    });
   }
 }
